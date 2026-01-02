@@ -19,8 +19,18 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# JSON API serializer
+gem "jsonapi-serializer"
+
+# Authentication solution for Rails [https://github.com/heartcombo/devise]
+gem "devise"
+gem "devise-jwt"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
+
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS)
+gem "rack-cors"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -35,6 +45,12 @@ gem "sidekiq"
 
 # Use redis for caching, action cable, and queueing.
 gem "redis"
+
+# Stripe payment processing
+gem "stripe"
+
+# HTTP client for API requests
+gem "httparty"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -54,6 +70,12 @@ group :development, :test do
 
   # Add rspec for testing
   gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+
+  # API documentation
+  gem "rswag"
+  gem "rswag-specs"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
@@ -71,4 +93,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "shoulda-matchers"
+  gem "database_cleaner-active_record"
 end
