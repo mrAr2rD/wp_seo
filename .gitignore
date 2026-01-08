@@ -16,3 +16,4 @@
 # Ignore storage files
 /storage
 /public/uploads
+dump.rdb

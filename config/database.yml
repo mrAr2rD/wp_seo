@@ -79,20 +79,5 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
-    <<: *default
-    database: ai_ssh_production
-    username: ai_ssh
-    password: <%= ENV["AI_SSH_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: ai_ssh_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: ai_ssh_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: ai_ssh_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>

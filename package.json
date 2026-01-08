@@ -8,8 +8,10 @@
     "tailwindcss": "^3.4.17"
   },
   "scripts": {
-    "build": "esbuild app/javascript/application.jsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx --watch=forever",
-    "build:css": "tailwindcss -i ./app/assets/stylesheets/input.css -o ./app/assets/builds/application.css"
+    "build": "esbuild app/javascript/application.jsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx",
+    "build:watch": "esbuild app/javascript/application.jsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx --watch=forever",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/input.css -o ./app/assets/builds/application.css",
+    "build:css:watch": "tailwindcss -i ./app/assets/stylesheets/input.css -o ./app/assets/builds/application.css --watch"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",

@@ -44,4 +44,26 @@
 
 # Ignore Docker-related files
 /.dockerignore
-/Dockerfile*
+
+# Ignore development and documentation
+/docs/
+/README.md
+/CLAUDE.md
+/GEMINI.md
+/Procfile.dev
+/docker-compose.yml
+
+# Ignore test files
+/spec/
+/test/
+/coverage/
+
+# Ignore IDE files
+/.vscode/
+/.idea/
+*.swp
+*.swo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
