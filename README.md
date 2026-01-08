@@ -115,13 +115,28 @@ bundle exec brakeman
 
 Swagger UI доступен по адресу: http://localhost:3000/api-docs
 
-## Развертывание
+## Развертывание на Production
 
-Проект использует Kamal для Docker-based развертывания.
+### Coolify Deployment
 
-```bash
-kamal deploy
-```
+Проект настроен для деплоя на **Coolify** с доменом **seoforge.contentforce.ru**.
+
+**Быстрый старт:**
+- [COOLIFY_QUICKSTART.md](COOLIFY_QUICKSTART.md) - Пошаговая инструкция на 5 минут
+
+**Полное руководство:**
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Подробная документация по деплою
+
+**Основные компоненты:**
+- Docker multi-stage build (Rails 8 + React 19)
+- PostgreSQL 16 для основной базы данных
+- Redis 7 для кэша и Sidekiq очередей
+- Puma web server (порт 3000)
+- Sidekiq worker для фоновых задач
+- SSL/TLS через Let's Encrypt
+
+**Необходимые переменные окружения:**
+См. [.env.example](.env.example) для полного списка
 
 ## Лицензия
 
