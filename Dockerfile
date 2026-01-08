@@ -62,10 +62,10 @@ RUN yarn build
 # Build CSS with Tailwind
 RUN yarn build:css
 
-# Precompile Rails assets
-RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+# Precompile Rails assets (skip javascript:build since we already built it)
+RUN SECRET_KEY_BASE_DUMMY=1 SKIP_YARN_BUILD=1 bundle exec rails assets:precompile
 
-# Remove development node_modules
+# Remove development node_modules AFTER all builds are complete
 RUN yarn install --frozen-lockfile --production=true && \
     yarn cache clean
 
