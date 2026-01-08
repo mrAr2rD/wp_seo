@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**ContentFlow** is a microSaaS platform for automating content creation and optimization for WordPress blogs. The application helps site owners, marketers, and bloggers manage content strategy, improve SEO, and automate article publishing.
+**SEOforge** is a microSaaS platform for automating content creation and optimization for WordPress blogs. The application helps site owners, marketers, and bloggers manage content strategy, improve SEO, and automate article publishing.
 
 ### Core Product Vision
 - Integrates with WordPress sites to analyze semantic keywords
@@ -25,7 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Frontend
 - **React 19** with esbuild bundler
 - **Hotwire** (Turbo Rails + Stimulus) for progressive enhancement
-- **Tailwind CSS 4** for styling with PostCSS/Autoprefixer
+- **Tailwind CSS 3** for styling with PostCSS/Autoprefixer
 - **Propshaft** for asset pipeline
 
 ### Infrastructure
@@ -115,7 +115,7 @@ Active Job is configured to use Sidekiq ([config/application.rb:26](config/appli
 - Google Analytics/Search Console data collection
 
 ### Module Name
-The Rails application module is `AiSsh` ([config/application.rb:9](config/application.rb#L9)).
+The Rails application module is `Seoforge` ([config/application.rb:9](config/application.rb#L9)).
 
 ## Product Development Roadmap
 

@@ -1,0 +1,449 @@
+---
+openapi: 3.0.1
+info:
+  title: ContentFlow API
+  version: v1
+  description: API для управления WordPress проектами и подписками
+paths:
+  "/api/v1/plans":
+    get:
+      summary: List plans
+      tags:
+      - Plans
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+  "/api/v1/plans/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Plan ID
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Show plan
+      tags:
+      - Plans
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+  "/api/v1/projects":
+    get:
+      summary: List projects
+      tags:
+      - Projects
+      security:
+      - Bearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+    post:
+      summary: Create project
+      tags:
+      - Projects
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '201':
+          description: created
+        '422':
+          description: unprocessable entity
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: My WordPress Site
+                    url:
+                      type: string
+                      example: https://mysite.com
+                    wordpress_api_key:
+                      type: string
+                      example: wp_api_key_123
+                  required:
+                  - name
+                  - url
+                  - wordpress_api_key
+              required:
+              - project
+  "/api/v1/projects/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Project ID
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Show project
+      tags:
+      - Projects
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+    patch:
+      summary: Update project
+      tags:
+      - Projects
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    url:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                      - active
+                      - inactive
+                      - pending
+    delete:
+      summary: Delete project
+      tags:
+      - Projects
+      security:
+      - Bearer: []
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: not found
+  "/api/v1/projects/{id}/validate_wordpress":
+    parameters:
+    - name: id
+      in: path
+      description: Project ID
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: Validate WordPress connection
+      tags:
+      - Projects
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+  "/api/v1/subscriptions":
+    get:
+      summary: List user subscriptions
+      tags:
+      - Subscriptions
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+    post:
+      summary: Create subscription
+      tags:
+      - Subscriptions
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '201':
+          description: created
+        '422':
+          description: unprocessable entity
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plan_id:
+                  type: integer
+                  example: 1
+                payment_method_id:
+                  type: string
+                  example: pm_card_visa
+              required:
+              - plan_id
+              - payment_method_id
+  "/api/v1/subscriptions/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Subscription ID
+      required: true
+      schema:
+        type: integer
+    patch:
+      summary: Update subscription
+      tags:
+      - Subscriptions
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plan_id:
+                  type: integer
+    delete:
+      summary: Cancel subscription
+      tags:
+      - Subscriptions
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+  "/api/v1/subscriptions/webhook":
+    post:
+      summary: Stripe webhook
+      tags:
+      - Subscriptions
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: invoice.payment_succeeded
+                data:
+                  type: object
+                  properties:
+                    object:
+                      type: object
+                      properties:
+                        subscription:
+                          type: string
+                          example: sub_123
+  "/api/v1/users":
+    post:
+      summary: Create user
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '201':
+          description: created
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: newuser@example.com
+                    password:
+                      type: string
+                      example: password123
+                    password_confirmation:
+                      type: string
+                      example: password123
+                    name:
+                      type: string
+                      example: New User
+                  required:
+                  - email
+                  - password
+                  - password_confirmation
+              required:
+              - user
+  "/api/v1/users/sign_in":
+    post:
+      summary: Sign in user
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: user@example.com
+                    password:
+                      type: string
+                      example: password123
+                  required:
+                  - email
+                  - password
+              required:
+              - user
+  "/api/v1/users/sign_out":
+    delete:
+      summary: Sign out user
+      tags:
+      - Authentication
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+  "/api/v1/current_user":
+    get:
+      summary: Get current user
+      tags:
+      - Users
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+servers:
+- url: http://localhost:3000
+  description: Development server
+- url: https://api.contentflow.com
+  description: Production server
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from /api/v1/users/sign_in
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        url:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - pending
+        created_at:
+          type: string
+          format: date-time
+    Plan:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        max_projects:
+          type: integer
+        max_articles:
+          type: integer
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+        plan_id:
+          type: integer
+        user_id:
+          type: integer
+        stripe_subscription_id:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string

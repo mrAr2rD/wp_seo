@@ -60,7 +60,7 @@ const Landing = () => {
             >
               ← Назад на главную
             </button>
-            <CardTitle className="text-2xl font-bold text-center">Вход в ContentFlow</CardTitle>
+            <CardTitle className="text-2xl font-bold text-center">Вход в SEOforge</CardTitle>
             <CardDescription className="text-center">
               Введите свои данные для входа
             </CardDescription>
@@ -244,7 +244,7 @@ const Landing = () => {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold">
               CF
             </div>
-            <span className="text-xl font-bold">ContentFlow</span>
+            <span className="text-xl font-bold">SEOforge</span>
           </div>
           <div className="flex gap-3">
             <Button variant="outline" onClick={() => setShowAuth('login')}>
@@ -265,7 +265,7 @@ const Landing = () => {
           <span className="text-primary">для вашего WordPress блога</span>
         </h1>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          ContentFlow - это microSaaS платформа для автоматизации создания и оптимизации
+          SEOforge - это microSaaS платформа для автоматизации создания и оптимизации
           контента с помощью AI. Генерируйте SEO-оптимизированные статьи и публикуйте их
           автоматически.
         </p>
@@ -527,7 +527,7 @@ const Landing = () => {
           Готовы автоматизировать создание контента?
         </h2>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Начните использовать ContentFlow уже сегодня и увидьте, как AI может трансформировать
+          Начните использовать SEOforge уже сегодня и увидьте, как AI может трансформировать
           ваш контент-маркетинг
         </p>
         <Button size="lg" onClick={() => setShowAuth('signup')}>
@@ -543,10 +543,10 @@ const Landing = () => {
               <div className="w-6 h-6 bg-primary rounded flex items-center justify-center text-primary-foreground text-xs font-bold">
                 CF
               </div>
-              <span className="font-semibold">ContentFlow</span>
+              <span className="font-semibold">SEOforge</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2024 ContentFlow. Все права защищены.
+              © 2024 SEOforge. Все права защищены.
             </p>
           </div>
         </div>

@@ -1,2 +1,18 @@
 /node_modules
 /app/assets/builds
+
+# Ignore temporary files
+/tmp
+/log/*.log
+!/log/.keep
+
+# Ignore bootsnap cache
+/tmp/cache
+
+# Ignore environment variables
+.env
+.env.local
+
+# Ignore storage files
+/storage
+/public/uploads

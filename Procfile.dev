@@ -1,5 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
-js: yarn build --watch
-css: yarn build:css --watch
+js: npx esbuild app/javascript/application.jsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx --watch=forever
 sidekiq: bundle exec sidekiq
 
