@@ -37,6 +37,7 @@ RUN apt-get update -qq && \
     git \
     libpq-dev \
     pkg-config \
+    libyaml-dev \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install Ruby gems
