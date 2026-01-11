@@ -1,4 +1,4 @@
-# Полная Инструкция по Деплою на Beget VPS через Coolify
+# 🚀 Полная Инструкция по Деплою на Beget VPS через Coolify
 
 ## 📋 Что вам понадобится
 
@@ -351,7 +351,7 @@ bundle exec rails db:version
 # Проверить Redis
 bundle exec rails console
 > Redis.current.ping
-# Должен вернуть "PONG"
+# Должен вернуться "PONG"
 
 # Проверить Sidekiq
 > Sidekiq.redis(&:info)
@@ -414,3 +414,68 @@ CORS_ORIGINS=https://your-domain.com
 Ваше приложение развернуто и готово к использованию. 
 
 Для расширенных настроек см. [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+---
+
+## 📚 Важные Файлы Проекта
+
+### Проверены и готовы к деплою:
+
+✅ **Dockerfile** - оптимизирован для Coolify:
+- Multi-stage build
+- Ruby 3.4.6
+- Node.js + Yarn для сборки assets
+- Puma web server на порту 3000
+- Автоматическая миграция БД через docker-entrypoint
+
+✅ **Gemfile** - все необходимые гемы:
+- Rails 8.0
+- PostgreSQL (pg)
+- Redis + Sidekiq
+- Devise + JWT (аутентификация)
+- Stripe (платежи)
+- HTTParty (API запросы)
+- Solid Cache/Queue/Cable
+
+✅ **package.json** - фронтенд зависимости:
+- React 19
+- esbuild (сборка JS)
+- Tailwind CSS
+- React Router
+
+✅ **config/database.yml** - настроен для production:
+- Использует ENV['DATABASE_URL']
+
+✅ **config/environments/production.rb** - оптимизирован:
+- Логи в STDOUT
+- SSL включен
+- Кэширование настроено
+- Solid Cache/Queue
+
+⚠️ **ВАЖНО**: В production.rb используется `solid_queue`, но в application.rb стоит `:sidekiq`. Нужно согласовать!
+
+### Рекомендация:
+
+Выберите один адаптер для фоновых задач:
+
+**Вариант 1: Использовать Sidekiq (рекомендуется)**
+```ruby
+# config/application.rb
+config.active_job.queue_adapter = :sidekiq
+
+# config/environments/production.rb
+# Закомментируйте эти строки:
+# config.active_job.queue_adapter = :solid_queue
+# config.solid_queue.connects_to = { database: { writing: :queue } }
+```
+
+**Вариант 2: Использовать Solid Queue**
+```ruby
+# config/application.rb
+config.active_job.queue_adapter = :solid_queue
+
+# config/environments/production.rb
+# Оставить как есть
+```
+
+Я рекомендую **Sidekiq**, так как у вас уже есть Redis и Sidekiq workers настроены.

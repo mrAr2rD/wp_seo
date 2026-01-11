@@ -1,6 +1,6 @@
 module Api
   module V1
-    class PlansController < ApplicationController
+    class PlansController < BaseController
       skip_before_action :authenticate_api_v1_user!, only: [:index, :show]
 
       def index
