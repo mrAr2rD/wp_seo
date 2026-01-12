@@ -47,7 +47,8 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Replace the default in-process memory cache store with a durable alternative.
-  config.cache_store = :solid_cache_store
+  # Use Redis for caching in production instead of Solid Cache (which requires a separate database)
+  config.cache_store = :redis_cache_store, { url: ENV.fetch("REDIS_URL", "redis://localhost:6379/0") }
 
   # Use Sidekiq for background jobs (configured in application.rb)
   # If you prefer Solid Queue, uncomment these lines and change application.rb:

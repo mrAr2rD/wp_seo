@@ -12,5 +12,6 @@ test:
   <<: *default
 
 production:
-  database: cache
+  # Use Redis instead of database for production caching
+  # Solid Cache requires a database, so we skip it in production
   <<: *default
