@@ -46,6 +46,7 @@ gem "sidekiq"
 
 # Use redis for caching, action cable, and queueing.
 gem "redis"
+gem "connection_pool", "~> 2.4"
 
 # Stripe payment processing
 gem "stripe"
